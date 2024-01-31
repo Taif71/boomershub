@@ -1,8 +1,10 @@
+"use client"
 import Folders from "@/app/components/folders/folders";
 import NavBar from "@/app/components/navbar/navbar";
 import dynamic from "next/dynamic";
-import React from "react";
+import React, { useState } from "react";
 // import UserSearchComponent from "./components/userSearchComponent";
+
 
 const SideBarLayout = dynamic(
   () => import("../../components/sidebar/sidebar"),
@@ -12,11 +14,12 @@ const SideBarLayout = dynamic(
 );
 
 const DrivePage = () => {
+  const [selectedFolder, setSelectedFolder] = useState('-1');
   return (
     <div>
       <NavBar></NavBar>
-      <SideBarLayout></SideBarLayout>
-      <Folders></Folders>
+      <SideBarLayout selectedFolder={selectedFolder} setSelectedFolder={setSelectedFolder}></SideBarLayout>
+      <Folders selectedFolder={selectedFolder} setSelectedFolder={setSelectedFolder}></Folders>
     </div>
   );
 };

@@ -530,7 +530,7 @@ cross-spawn@^7.0.0, cross-spawn@^7.0.2:
     shebang-command "^2.0.0"
     which "^2.0.1"
 
-csstype@^3.0.2:
+csstype@^3.0.2, csstype@^3.1.0:
   version "3.1.3"
   resolved "https://registry.npmjs.org/csstype/-/csstype-3.1.3.tgz"
   integrity sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==
@@ -1953,6 +1953,16 @@ semver@^7.5.4:
   dependencies:
     lru-cache "^6.0.0"
 
+seroval-plugins@^1.0.3:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/seroval-plugins/-/seroval-plugins-1.0.4.tgz#917d2cd103525f0238433a49479def0ce65a56e4"
+  integrity sha512-DQ2IK6oQVvy8k+c2V5x5YCtUa/GGGsUwUBNN9UqohrZ0rWdUapBFpNMYP1bCyRHoxOJjdKGl+dieacFIpU/i1A==
+
+seroval@^1.0.3:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/seroval/-/seroval-1.0.4.tgz#0400d24a48b1f6f44b8a3d55af0476a1c5e8643f"
+  integrity sha512-qQs/N+KfJu83rmszFQaTxcoJoPn6KNUruX4KmnmyD0oZkUoiNvJ1rpdYKDf4YHM05k+HOgCxa3yvf15QbVijGg==
+
 set-function-length@^1.1.1:
   version "1.2.0"
   resolved "https://registry.npmjs.org/set-function-length/-/set-function-length-1.2.0.tgz"
@@ -2003,6 +2013,15 @@ slash@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/slash/-/slash-3.0.0.tgz"
   integrity sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==
+
+solid-js@^1.8.12:
+  version "1.8.12"
+  resolved "https://registry.yarnpkg.com/solid-js/-/solid-js-1.8.12.tgz#12903f076cdbd74e13dd6ab47b1006c3a07f5591"
+  integrity sha512-sLE/i6M9FSWlov3a2pTC5ISzanH2aKwqXTZj+bbFt4SUrVb4iGEa7fpILBMOxsQjkv3eXqEk6JVLlogOdTe0UQ==
+  dependencies:
+    csstype "^3.1.0"
+    seroval "^1.0.3"
+    seroval-plugins "^1.0.3"
 
 source-map-js@^1.0.2:
   version "1.0.2"
