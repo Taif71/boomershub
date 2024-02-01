@@ -163,11 +163,11 @@ export class FoldersController {
    * delete record
    * @param {string} id
    */
-  @ApiOperation({ summary: 'delete record' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'Delete record' })
+  @ApiOperation({ summary: 'Delete' })
+  @ApiResponse({ status: HttpStatus.OK, description: 'Delete folders' })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
-    description: 'Record not found',
+    description: 'Folder not found',
   })
   @Delete(':id')
   remove(@Param('id') id: string) {

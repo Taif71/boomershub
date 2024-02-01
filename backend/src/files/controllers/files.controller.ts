@@ -88,7 +88,7 @@ export class FilesController {
    * @Param {string} query
    */
   @ApiOperation({ summary: 'Fetches records' })
-  @ApiResponse({ status: 200, description: 'Returns list of records.' })
+  @ApiResponse({ status: 200, description: 'Returns list of files'})
   @Get()
   findAll(
     @Query() query,
@@ -111,11 +111,11 @@ export class FilesController {
    * Fetch a record by id 
    * @Param {string} id
    */
-  @ApiOperation({ summary: 'Get a record by id' })
-  @ApiResponse({ status: 200, description: 'Returns record.' })
+  @ApiOperation({ summary: 'Get a FILE by id' })
+  @ApiResponse({ status: 200, description: 'Returns FILE.' })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
-    description: 'Record Not found.',
+    description: 'FILE Not found.',
   })
   @Get(':id')
   findOne(@Param('id') id: string) {
@@ -139,11 +139,11 @@ export class FilesController {
   @UsePipes(new NullValidationPipe())
   @UsePipes(new ValidationPipe(true))
   @UsePipes(new TrimPipe())
-  @ApiOperation({ summary: 'Update record' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'Return record' })
+  @ApiOperation({ summary: 'Update File' })
+  @ApiResponse({ status: HttpStatus.OK, description: 'Return File' })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
-    description: 'Record not found',
+    description: 'File not found',
   })
   @Patch(':id')
   update(@Param('id') id: string, @Body() data: UpdateFileDto) {

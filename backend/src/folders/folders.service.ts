@@ -92,7 +92,7 @@ export class FoldersService {
       });
 
       if (!record) {
-        throw new NotFoundException(`Record #${id} not found`);
+        throw new NotFoundException(`Folder #${id} not found`);
       }
 
       return await this.repo.save({

@@ -64,16 +64,16 @@ export class UserDTO implements Readonly<UserDTO> {
     updatedBy: string;
 
     public static from(dto: Partial<UserDTO>) {
-        const it = new UserDTO();
-        it.id = dto.id;
-        it.email = dto.email;
-        it.password = dto.password;
-        it.firstName = dto.firstName;
-        it.lastName = dto.lastName;
-        it.isActive = dto.isActive;
-        it.isDeleted = dto.isDeleted;
-        it.isVerified = dto.isVerified;
-        return it;
+        const data = new UserDTO();
+        data.id = dto.id;
+        data.email = dto.email;
+        data.password = dto.password;
+        data.firstName = dto.firstName;
+        data.lastName = dto.lastName;
+        data.isActive = dto.isActive;
+        data.isDeleted = dto.isDeleted;
+        data.isVerified = dto.isVerified;
+        return data;
     }
 
     public static fromEntity(entity: User) {

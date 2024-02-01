@@ -63,29 +63,6 @@ export class AwsS3Controller {
     }
   }
 
-  @ApiExcludeEndpoint()
-  @Get('s3/upload')
-  public createGet() {
-    throw new MethodNotAllowedException('Method Not Allowed');
-  }
-
-  @ApiExcludeEndpoint()
-  @Patch('s3/upload')
-  public createPatch() {
-    throw new MethodNotAllowedException('Method Not Allowed');
-  }
-
-  @ApiExcludeEndpoint()
-  @Put('s3/upload')
-  public createPut() {
-    throw new MethodNotAllowedException('Method Not Allowed');
-  }
-
-  @ApiExcludeEndpoint()
-  @Delete('s3/upload')
-  public createDelete() {
-    throw new MethodNotAllowedException('Method Not Allowed');
-  }
 
   @ApiBearerAuth()
   @ApiHeader({
@@ -109,29 +86,5 @@ export class AwsS3Controller {
     } catch (err) {
       throw new HttpException(err, err.status || HttpStatus.BAD_REQUEST);
     }
-  }
-
-  @ApiExcludeEndpoint()
-  @Get('s3/delete')
-  public removeGet() {
-    throw new MethodNotAllowedException('Method Not Allowed');
-  }
-
-  @ApiExcludeEndpoint()
-  @Patch('s3/delete')
-  public removePatch() {
-    throw new MethodNotAllowedException('Method Not Allowed');
-  }
-
-  @ApiExcludeEndpoint()
-  @Put('s3/delete')
-  public removePut() {
-    throw new MethodNotAllowedException('Method Not Allowed');
-  }
-
-  @ApiExcludeEndpoint()
-  @Post('s3/delete')
-  public removePost() {
-    throw new MethodNotAllowedException('Method Not Allowed');
   }
 }

@@ -75,10 +75,11 @@ setup_master_instance() {
     echo "public ip: $MASTER_NODE_INSTANCE_PUBLIC_IP"
      echo "private ip: $MASTER_NODE_INSTANCE_PRIVATE_IP"
     # aws ec2 wait instance-running --instance-ids "$MASTER_NODE_INSTANCE_ID"
+    ls -la
     chmod 400 "$KEY_PAIR_FILE"
     ssh -i "$KEY_PAIR_FILE" "$USER@$MASTER_NODE_INSTANCE_PUBLIC_IP" 'sudo apt update && sudo apt install docker.io && sudo apt install git && sudo apt install make && sudo apt update'
     scp -i "$KEY_PAIR_FILE" -r "$BOOMERSHUB_FOLDER" "$USER@$MASTER_NODE_INSTANCE_PUBLIC_IP":~
-    ssh -i "$KEY_PAIR_FILE" "$USER@$MASTER_NODE_INSTANCE_PUBLIC_IP" 'ls -la && cd deployment && make clone'
+    ssh -i "$KEY_PAIR_FILE" "$USER@$MASTER_NODE_INSTANCE_PUBLIC_IP" 'ls -la && sudo make clone'
 }
 
 # Deployment Steps
