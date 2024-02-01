@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: boomershubDB
+      MYSQL_DB_USERNAME: user
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    networks:
+      boomershub:
+        ipv4_address: 162.168.1.5
+networks:
+  boomershub:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 162.168.1.0/24
+          gateway: 162.168.1.1
