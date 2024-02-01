@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../styles/globals.css";
-// import 'materialize-css/dist/js/materialize.min.js';
 import Provider from "@/redux/provider";
-import dynamic from "next/dynamic";
-import Head from "next/head";
+
 
 
 const inter = Inter({ subsets: ["latin"] });

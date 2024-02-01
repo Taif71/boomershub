@@ -51,7 +51,6 @@ const FolderTreeView = ( props : any) => {
       </div>
     );
 };
-// onClick={() => {props.setSelectedFolder(item.id)
   
 const SideBar = ({ children, setSelectedFolder }: any) => {
     return (

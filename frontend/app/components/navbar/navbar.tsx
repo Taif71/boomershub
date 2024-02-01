@@ -1,5 +1,4 @@
 
-
 const NavBar = ({ children, title}: any) => {
     return (
         <div className="navbar-fixed">
@@ -43,23 +42,7 @@ const NavBar = ({ children, title}: any) => {
                                 className="waves-effect waves-light btn btn-flat white-text"
                             >New</a>
                         </li>
-                    </ul>
-                    <ul className="right">
-                        <li>
-                            <a href="#!"><i className="material-icons grey-text text-darken-1">view_list</i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#!">
-                                <i className="material-icons grey-text text-darken-1">info</i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#!">
-                                <i className="material-icons grey-text text-darken-1">settings</i>
-                            </a>
-                        </li>
-                    </ul>
+                    </ul>                    
                 </div>
             </nav>
         </div>

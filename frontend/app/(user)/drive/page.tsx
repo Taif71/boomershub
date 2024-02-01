@@ -3,8 +3,6 @@ import Folders from "@/app/components/folders/folders";
 import NavBar from "@/app/components/navbar/navbar";
 import dynamic from "next/dynamic";
 import React, { useState } from "react";
-// import UserSearchComponent from "./components/userSearchComponent";
-
 
 const SideBarLayout = dynamic(
   () => import("../../components/sidebar/sidebar"),
