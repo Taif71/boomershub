@@ -49,7 +49,7 @@ create_and_config_security_group_nodes() {
 
 INSTANCE_TYPE=t2.medium
 AMI_ID=ami-0c7217cdde317cfec  # Replace with your desired AMI ID
-KEY_NAME=aws_login_1  # Replace with your key pair name
+KEY_NAME=boomers_pair # Replace with your key pair name
 
 MASTER_NODE_INSTANCE_ID=''
 MASTER_NODE_INSTANCE_NAME='master'
@@ -59,28 +59,26 @@ USER=ubuntu
 
 create_ec2_node() {
     MASTER_NODE_INSTANCE=$(aws ec2 run-instances --image-id "$AMI_ID" --count 1 --instance-type "$INSTANCE_TYPE" --key-name "$KEY_NAME" --subnet-id "$PUBLIC_SUBNET_ID" --security-group-ids "$NODES_SECURITY_GROUP_ID" --region "$AWS_REGION" --query 'Instances[0]' --output json --associate-public-ip-address --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$MASTER_NODE_INSTANCE_NAME}]")
-    WORKER_NODE_1_INSTANCE=$(aws ec2 run-instances --image-id "$AMI_ID" --count 1 --instance-type "$INSTANCE_TYPE" --key-name "$KEY_NAME" --subnet-id "$PUBLIC_SUBNET_ID" --security-group-ids "$NODES_SECURITY_GROUP_ID" --region "$AWS_REGION" --query 'Instances[0]' --output json --associate-public-ip-address --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$WORER_NODE_1_INSTANCE_NAME}]")
-    WORKER_NODE_2_INSTANCE=$(aws ec2 run-instances --image-id "$AMI_ID" --count 1 --instance-type "$INSTANCE_TYPE" --key-name "$KEY_NAME" --subnet-id "$PUBLIC_SUBNET_ID" --security-group-ids "$NODES_SECURITY_GROUP_ID" --region "$AWS_REGION" --query 'Instances[0]' --output json --associate-public-ip-address --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$WORER_NODE_2_INSTANCE_NAME}]")
     echo "Launched Master INSTANCE..."
-    echo "Launched Worker1 INSTANCE...."
-    echo "Launched Worker2 INSTANCE....."
-    echo "Nodes are initializing....."
+    echo "Node are initializing....."
    
     MASTER_NODE_INSTANCE_ID=$(echo "$MASTER_NODE_INSTANCE" | grep -o '"InstanceId": *"[^"]*' | awk -F'"' '{print $4}')
     MASTER_NODE_INSTANCE_PRIVATE_IP=$(echo "$MASTER_NODE_INSTANCE" | grep -m 1 -o '"PrivateIpAddress": *"[^"]*' | awk -F'"' '{print $4}')
     aws ec2 wait instance-running --instance-ids "$MASTER_NODE_INSTANCE_ID"
     MASTER_NODE_INSTANCE_PUBLIC_IP=$(aws ec2 describe-instances --instance-ids "$MASTER_NODE_INSTANCE_ID" --query 'Reservations[0].Instances[0].PublicIpAddress' --output text)
-
 }
 
 
-KEY_PAIR_FILE='./aws_login_1.pem'
+KEY_PAIR_FILE='./boomers_pair.pem'
 BOOMERSHUB_FOLDER="/home/meem/Desktop/boomershub_project/deployment"
 setup_master_instance() {
+    echo "public ip: $MASTER_NODE_INSTANCE_PUBLIC_IP"
+     echo "private ip: $MASTER_NODE_INSTANCE_PRIVATE_IP"
+    # aws ec2 wait instance-running --instance-ids "$MASTER_NODE_INSTANCE_ID"
     chmod 400 "$KEY_PAIR_FILE"
-    ssh -i "$KEY_PAIR_FILE" "$USER@$MASTER_NODE_INSTANCE_PUBLIC_IP" 'sudo apt update && sudo apt install git && sudo apt install make && sudo apt update'
+    ssh -i "$KEY_PAIR_FILE" "$USER@$MASTER_NODE_INSTANCE_PUBLIC_IP" 'sudo apt update && sudo apt install docker.io && sudo apt install git && sudo apt install make && sudo apt update'
     scp -i "$KEY_PAIR_FILE" -r "$BOOMERSHUB_FOLDER" "$USER@$MASTER_NODE_INSTANCE_PUBLIC_IP":~
-    ssh -i "$KEY_PAIR_FILE" "$USER@$MASTER_NODE_INSTANCE_PUBLIC_IP" 'cd deployment && make clone'
+    ssh -i "$KEY_PAIR_FILE" "$USER@$MASTER_NODE_INSTANCE_PUBLIC_IP" 'ls -la && cd deployment && make clone'
 }
 
 # Deployment Steps
@@ -92,6 +90,7 @@ main() {
     create_public_subnet
     create_and_config_security_group_nodes
     create_ec2_node
+    setup_master_instance
 }
 
 # Run the deployment

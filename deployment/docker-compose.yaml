@@ -23,10 +23,10 @@ services:
       dockerfile: Dockerfile
     restart: always
     ports:
-      - "3000:3000"
+      - "9000:3000"
     networks:
       boomershub:
-        ipv4_address: 162.168.1.5
+        ipv4_address: 162.168.1.7
         
   backend:
     user: root
