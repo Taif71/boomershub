@@ -32,12 +32,13 @@ const FolderTreeView = ( props : any) => {
         {isOpen() && (
           <ul style={{ listStyleType: 'none', marginLeft: '20px' }}>
             {props.data.map((item: any) => (
-              <li key={item.id} onClick={() => {props.setSelectedFolder(item.id)
-                console.log(item.id)
-              }}>
+              <li key={item.id} 
+              >
                 {item.type === 'folder' ? (
                   <div>
-                    <i className="material-icons blue-text text-darken-1">folder</i>  {item.name}                 
+                    <div onClick={() => {props.setSelectedFolder(item.id)}}>
+                     <i className="material-icons blue-text text-darken-1">folder</i>  {item.name}                 
+                    </div>
                     <FolderTreeView data={item.contents} setSelectedFolder={props.setSelectedFolder} />
                   </div>
                 ) : (
@@ -50,7 +51,8 @@ const FolderTreeView = ( props : any) => {
       </div>
     );
 };
-
+// onClick={() => {props.setSelectedFolder(item.id)
+  
 const SideBar = ({ children, setSelectedFolder }: any) => {
     return (
         <ul className="side-nav fixed floating transparent z-depth-0">

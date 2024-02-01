@@ -35,6 +35,7 @@ const Folders = (props: any) => {
             {
                 folders.map((e: any) => (
                     <div 
+                        onClick={() => { props.setSelectedFolder(e.id)}}
                         className="card-panel folder"
                        >                           
                         <i className="material-icons left">folder</i>{e.name}
