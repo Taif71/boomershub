@@ -63,6 +63,20 @@
       NEXT_PUBLIC_HOST=http://localhost:3000
 3. cd into backend and run:
     - npm run create:env
+      or,
+    - add a .env file in the backend folder and add the following env:
+      - PORT=5007
+      - MYSQL_DB_USERNAME=root
+      - MYSQL_DATABASE=boomershubDB
+      - MYSQL_DB_PORT=3306
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DB_HOST=localhost
+      - AWS_S3_BUCKET=boomers-bucket
+      - AWS_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=AKIATECJNGWHAJQLWP43
+      - AWS_SECRET_ACCESS_KEY=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
+      - SECRET_KEY_JWT=eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiU3VwZXIgQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IiQyYSQwOCQ3ZWhzMWtRWXU1YkZMRUtSUWw2Y0VlUURHMXVIcjZMWkVycWpPNFNMNGxaMmpSVDNpNC5kUyIsImV4cCI6MTYxNDcwOTQ5OCwiaWF0IjoxNjE0NzA5NDk4fQ.NBPiLlPHByxSpXZzGblYJ_rWGjvyGtRDUPViR34kFmI
+      
     - npm run start:dev
 
 

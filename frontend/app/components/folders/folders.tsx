@@ -1,11 +1,6 @@
-// import { useState } from "react";
-
 import { folderTreeView } from "@/dummy/dummy";
 
 const findFolder = (root: any, id: string) => {
-    // if(!root) {
-    //     return [];
-    // }
     if(root.id === id) {
         return root.contents;
     }
@@ -18,11 +13,8 @@ const findFolder = (root: any, id: string) => {
 }
 
 const Folders = (props: any) => {
-    // folderTreeView
-    // const [isHovered, setHovered] = useState(false);
     const selectedFolder = props.selectedFolder;
     const folders = (selectedFolder == '-1' ? folderTreeView : findFolder({contents: folderTreeView},selectedFolder));
-    console.log({folders, selectedFolder})
     
     const handleDeleteClick = () => {
       // Handle the delete action
@@ -35,6 +27,7 @@ const Folders = (props: any) => {
             {
                 folders.map((e: any) => (
                     <div 
+                        key={e.id}  
                         onClick={() => { props.setSelectedFolder(e.id)}}
                         className="card-panel folder"
                        >                           
