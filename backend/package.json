@@ -18,7 +18,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "create:env": "[ -f .env ] || node -r fs -e \"fs.copyFileSync('.env.sample', '.env', fs.constants.COPYFILE_EXCL)\""
+    "create:env": "[ -f .env ] || node -r fs -e \"fs.copyFileSync('.env.sample', '.env', fs.constants.COPYFILE_EXCL)\"",
+    "start:container": "node dist/main.js"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
