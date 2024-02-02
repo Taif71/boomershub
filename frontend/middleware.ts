@@ -1,7 +1,5 @@
-
 import { NextRequest, NextResponse } from "next/server";
 import { decrypt } from "./utils/helper";
-// export const exludeRoute: string[] = ["/api/cookie"];
 
 export interface IUser {
   readonly id: string;
@@ -21,10 +19,6 @@ export const middleware = async (request: NextRequest) => {
   const user: IUser | undefined =
     encryptedUser && decrypt(encryptedUser?.value);
 
-  // console.log({ url })
-  // console.log({ user });
-  // console.log({ encryptedUser})
-  // console.log({ token })
   if (currentPath === "/") {
     if (token !== undefined) {
       url.pathname = "/drive";
