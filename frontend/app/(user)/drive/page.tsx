@@ -1,5 +1,5 @@
 "use client"
-import Folders from "@/app/components/folders/folders";
+import ContentsArea from "@/app/components/Contents/ContentsArea";
 import NavBar from "@/app/components/navbar/navbar";
 import { useGetFoldersQuery } from "@/redux/features/apis/foldersapi";
 import dynamic from "next/dynamic";
@@ -13,7 +13,7 @@ const SideBarLayout = dynamic(
 );
 
 const DrivePage = () => {
-  const [selectedFolder, setSelectedFolder] = useState('-1');
+  const [selectedFolder, setSelectedFolder] = useState(null);
 
   // const { data: folders } =
   //   useGetFoldersQuery(
@@ -33,7 +33,7 @@ const DrivePage = () => {
     <div>
       <NavBar></NavBar>
       <SideBarLayout selectedFolder={selectedFolder} setSelectedFolder={setSelectedFolder}></SideBarLayout>
-      <Folders selectedFolder={selectedFolder} setSelectedFolder={setSelectedFolder}></Folders>
+      <ContentsArea selectedFolder={selectedFolder} setSelectedFolder={setSelectedFolder}></ContentsArea>
     </div>
   );
 };

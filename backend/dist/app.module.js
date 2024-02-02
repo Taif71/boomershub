@@ -19,7 +19,11 @@ const auth_module_1 = require("./auth/auth.module");
 const core_1 = require("@nestjs/core");
 const filters_1 = require("./common/filters");
 const interceptor_1 = require("./common/interceptor");
+const replace_authorization_header_middleware_1 = require("./common/middleware/replace-authorization-header.middleware");
 let AppModule = class AppModule {
+    configure(consumer) {
+        consumer.apply(replace_authorization_header_middleware_1.ReplaceAuthorizationHeaderFromCookie).forRoutes('*');
+    }
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([

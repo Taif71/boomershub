@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpErrorFilter } from './common/filters';
 import { LoggingInterceptor, TransformInterceptor } from './common/interceptor';
+import { ReplaceAuthorizationHeaderFromCookie } from './common/middleware/replace-authorization-header.middleware';
 
 @Module({
   imports: [
@@ -37,4 +38,8 @@ import { LoggingInterceptor, TransformInterceptor } from './common/interceptor';
     },
   ],
 })
-export class AppModule { }
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(ReplaceAuthorizationHeaderFromCookie).forRoutes('*')
+  }
+}
