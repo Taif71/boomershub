@@ -11,6 +11,8 @@ export const authApi = createApi({
   endpoints: (builder) => ({
     login: builder.mutation<void, ILogin>({
       queryFn: async (data): Promise<any> => {
+        console.log({ data })
+        console.log(JSON.stringify(data))
         try {          
           const response = await fetch(
             `${process.env.NEXT_PUBLIC_API_ENDPOINT}/login`,
@@ -22,7 +24,7 @@ export const authApi = createApi({
               },
             }
           );
-
+            console.log({ response})
           if (response.ok) {
             const x_drive_key = response.headers.get("x-drive-key");
             const userData = await response.json();

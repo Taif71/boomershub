@@ -33,13 +33,15 @@ export const middleware = async (request: NextRequest) => {
     url.pathname = "/login"
     return NextResponse.redirect(url);
   } else if(currentPath === "/drive") {
-    if (token !== undefined) {
-      url.pathname = "/drive";
+    if (token == undefined) {
+      url.pathname = "/login";
       return NextResponse.redirect(url);
     }
-    url.pathname = "/login"
+  } else if(currentPath == '/login' && token) {
+    url.pathname = "/drive";
     return NextResponse.redirect(url);
   }
+  return NextResponse.next();
 };
 
 export const config = {

@@ -14,7 +14,7 @@ export class AuthController {
      * Constructor
      * @param {AuthService} authService
      */
-    constructor(private readonly authService: AuthService) {}
+    constructor(private readonly authService: AuthService) { }
 
     /**
      * User login with jwtToken
@@ -29,7 +29,6 @@ export class AuthController {
     @Post('login')
     public async login(@Res() res, @Body() loginDto: AuthDTO): Promise<IUser> {
         const authRes = await this.authService.login(loginDto);
-
         return res
             .status(authRes.status)
             .set({

@@ -4,7 +4,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { foldersApi } from "./features/apis/foldersapi";
 import { filesApi } from "./features/apis/filesapi";
-import { authApi } from "./features/auth-api";
+import { authApi } from "./features/apis/auth-api";
 
 const store = configureStore({
   reducer: {
