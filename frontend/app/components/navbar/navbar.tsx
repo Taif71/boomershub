@@ -50,17 +50,6 @@ const NavBar = ({ children, title}: any) => {
                         </li>
                     </ul>
                 </div>
-
-                <div className="nav-wrapper nav-2" onClick={handleNewBtnClick}>
-                    {/* <ul>
-                        <li>
-                            <a
-                                href="#!"
-                                className="waves-effect waves-light btn btn-flat white-text"
-                            >New</a>
-                        </li>
-                    </ul>                     */}
-                </div>
                 <CreateOptionsComponent />
             </nav>
         </div>
