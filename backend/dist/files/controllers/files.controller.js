@@ -105,7 +105,7 @@ __decorate([
 ], FilesController.prototype, "create", null);
 __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Fetches records' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Returns list of records.' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Returns list of files' }),
     (0, common_1.Get)(),
     __param(0, (0, common_1.Query)()),
     __param(1, (0, user_decorator_1.User)()),
@@ -114,11 +114,11 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], FilesController.prototype, "findAll", null);
 __decorate([
-    (0, swagger_1.ApiOperation)({ summary: 'Get a record by id' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Returns record.' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Get a FILE by id' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Returns FILE.' }),
     (0, swagger_1.ApiResponse)({
         status: common_1.HttpStatus.NOT_FOUND,
-        description: 'Record Not found.',
+        description: 'FILE Not found.',
     }),
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
@@ -130,11 +130,11 @@ __decorate([
     (0, common_1.UsePipes)(new pipes_1.NullValidationPipe()),
     (0, common_1.UsePipes)(new pipes_1.ValidationPipe(true)),
     (0, common_1.UsePipes)(new pipes_1.TrimPipe()),
-    (0, swagger_1.ApiOperation)({ summary: 'Update record' }),
-    (0, swagger_1.ApiResponse)({ status: common_1.HttpStatus.OK, description: 'Return record' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Update File' }),
+    (0, swagger_1.ApiResponse)({ status: common_1.HttpStatus.OK, description: 'Return File' }),
     (0, swagger_1.ApiResponse)({
         status: common_1.HttpStatus.NOT_FOUND,
-        description: 'Record not found',
+        description: 'File not found',
     }),
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),

@@ -66,7 +66,7 @@ let FoldersService = class FoldersService {
                 },
             });
             if (!record) {
-                throw new common_1.NotFoundException(`Record #${id} not found`);
+                throw new common_1.NotFoundException(`Folder #${id} not found`);
             }
             return await this.repo.save({
                 ...record,

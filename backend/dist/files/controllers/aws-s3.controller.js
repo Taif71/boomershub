@@ -31,18 +31,6 @@ let AwsS3Controller = class AwsS3Controller {
             throw new common_1.HttpException(err, err.status || common_1.HttpStatus.BAD_REQUEST);
         }
     }
-    createGet() {
-        throw new common_1.MethodNotAllowedException('Method Not Allowed');
-    }
-    createPatch() {
-        throw new common_1.MethodNotAllowedException('Method Not Allowed');
-    }
-    createPut() {
-        throw new common_1.MethodNotAllowedException('Method Not Allowed');
-    }
-    createDelete() {
-        throw new common_1.MethodNotAllowedException('Method Not Allowed');
-    }
     async remove(obj) {
         try {
             return await this.s3Service.deleteFile(obj.key);
@@ -50,18 +38,6 @@ let AwsS3Controller = class AwsS3Controller {
         catch (err) {
             throw new common_1.HttpException(err, err.status || common_1.HttpStatus.BAD_REQUEST);
         }
-    }
-    removeGet() {
-        throw new common_1.MethodNotAllowedException('Method Not Allowed');
-    }
-    removePatch() {
-        throw new common_1.MethodNotAllowedException('Method Not Allowed');
-    }
-    removePut() {
-        throw new common_1.MethodNotAllowedException('Method Not Allowed');
-    }
-    removePost() {
-        throw new common_1.MethodNotAllowedException('Method Not Allowed');
     }
 };
 exports.AwsS3Controller = AwsS3Controller;
@@ -86,34 +62,6 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], AwsS3Controller.prototype, "create", null);
 __decorate([
-    (0, swagger_1.ApiExcludeEndpoint)(),
-    (0, common_1.Get)('s3/upload'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], AwsS3Controller.prototype, "createGet", null);
-__decorate([
-    (0, swagger_1.ApiExcludeEndpoint)(),
-    (0, common_1.Patch)('s3/upload'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], AwsS3Controller.prototype, "createPatch", null);
-__decorate([
-    (0, swagger_1.ApiExcludeEndpoint)(),
-    (0, common_1.Put)('s3/upload'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], AwsS3Controller.prototype, "createPut", null);
-__decorate([
-    (0, swagger_1.ApiExcludeEndpoint)(),
-    (0, common_1.Delete)('s3/upload'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], AwsS3Controller.prototype, "createDelete", null);
-__decorate([
     (0, swagger_1.ApiBearerAuth)(),
     (0, swagger_1.ApiHeader)({
         name: 'Authorization',
@@ -135,34 +83,6 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AwsS3Controller.prototype, "remove", null);
-__decorate([
-    (0, swagger_1.ApiExcludeEndpoint)(),
-    (0, common_1.Get)('s3/delete'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], AwsS3Controller.prototype, "removeGet", null);
-__decorate([
-    (0, swagger_1.ApiExcludeEndpoint)(),
-    (0, common_1.Patch)('s3/delete'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], AwsS3Controller.prototype, "removePatch", null);
-__decorate([
-    (0, swagger_1.ApiExcludeEndpoint)(),
-    (0, common_1.Put)('s3/delete'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], AwsS3Controller.prototype, "removePut", null);
-__decorate([
-    (0, swagger_1.ApiExcludeEndpoint)(),
-    (0, common_1.Post)('s3/delete'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], AwsS3Controller.prototype, "removePost", null);
 exports.AwsS3Controller = AwsS3Controller = __decorate([
     (0, swagger_1.ApiTags)('File Upload'),
     (0, swagger_1.ApiResponse)({

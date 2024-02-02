@@ -143,11 +143,11 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], FoldersController.prototype, "update", null);
 __decorate([
-    (0, swagger_1.ApiOperation)({ summary: 'delete record' }),
-    (0, swagger_1.ApiResponse)({ status: common_1.HttpStatus.OK, description: 'Delete record' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Delete' }),
+    (0, swagger_1.ApiResponse)({ status: common_1.HttpStatus.OK, description: 'Delete folders' }),
     (0, swagger_1.ApiResponse)({
         status: common_1.HttpStatus.NOT_FOUND,
-        description: 'Record not found',
+        description: 'Folder not found',
     }),
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),
