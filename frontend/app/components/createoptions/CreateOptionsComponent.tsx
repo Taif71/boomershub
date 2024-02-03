@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import 'materialize-css/dist/css/materialize.min.css';
 import M from 'materialize-css/dist/js/materialize.min.js';
-import FormModal from '../FormModal/FormModal';
+import FileFormModal from '../FormModal/FileFormModal';
+import FolderFormModal from '../FormModal/FolderFormModal';
 
 const CreateOptionsComponent = (props: any) => {
-  const [showOptions, updateShowOptions] = useState(false);
+  const [showFolderModal, updateShowFolderModal] = useState(false);
+  const [showFileModal, updateShowFileModal] = useState(false);
   
   useEffect(() => {
     // Initialize the dropdown
@@ -14,10 +16,12 @@ const CreateOptionsComponent = (props: any) => {
     }    
   }, []);
 
-  // const [createFolder] = useCreateFolderMutation();
-
   const onFolderClick = async (values: any) => {
-    updateShowOptions(!showOptions);
+    updateShowFolderModal(!showFolderModal);
+  };
+
+  const onFileClick = async (values: any) => {
+    updateShowFileModal(!showFileModal);
   };
 
   return (
@@ -35,8 +39,8 @@ const CreateOptionsComponent = (props: any) => {
             <i className="material-icons">view_module</i>Create a folder
           </a>
         </li>
-        <li>
-          <a href="#!"
+        <li onClick={onFileClick}>
+          <a href="#modal2"
              className="modal-trigger" 
           >
             <i className="material-icons">cloud</i>Upload a file
@@ -45,7 +49,8 @@ const CreateOptionsComponent = (props: any) => {
       </ul>
 
       {/* Conditionally render the modal based on showOptions */}
-      { showOptions && <FormModal selectedFolder={props.selectedFolder}/>}      
+      { showFolderModal && <FolderFormModal selectedFolder={props.selectedFolder}/>} 
+      { showFileModal && <FileFormModal selectedFolder={props.selectedFolder}/>}      
     </div>
   );
 };

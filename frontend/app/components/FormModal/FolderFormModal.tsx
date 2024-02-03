@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import { useCreateFolderMutation } from '@/redux/features/apis/foldersapi';
 
-const FormModal = (props: any) => {
+const FolderFormModal = (props: any) => {
   const [reloadCounter, setReloadCounter] = useState(0);
   const [formData, setFormData] = useState({
     name: '',
@@ -46,7 +46,7 @@ const FormModal = (props: any) => {
 
       <div id="modal1" className="modal" ref={modalRef}>
         <div className="modal-content">
-          <h4>Create a new folder</h4>
+          <h4 >Create a new folder</h4>
           <form onSubmit={handleSubmit}>
             <div className="input-field">
               <input
@@ -68,4 +68,4 @@ const FormModal = (props: any) => {
   );
 };
 
-export default FormModal;
+export default FolderFormModal;
