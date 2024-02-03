@@ -32,8 +32,7 @@ export class AwsS3Service {
     };
 
     try {
-      const s3Data = await this.s3.upload(params).promise();
-      return s3Data
+      return await this.s3.upload(params).promise();
     } catch (err) {
       console.log('fffggg', err);
       throw new HttpException(err, err.status || HttpStatus.BAD_REQUEST);
