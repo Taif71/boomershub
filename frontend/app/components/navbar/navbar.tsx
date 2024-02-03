@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CreateOptionsComponent from "../createoptions/CreateOptionsComponent";
 
-const NavBar = ({ children, title}: any) => {
+const NavBar = (props: any) => {
     const [isNewBtnClicked, setIsNewBtnClicked] = useState(false);
     const [showOptions, updateShowOptions] = useState(false);
 
@@ -50,7 +50,7 @@ const NavBar = ({ children, title}: any) => {
                         </li>
                     </ul>
                 </div>
-                <CreateOptionsComponent />
+                <CreateOptionsComponent selectedFolder={props.selectedFolder} setSelectedFolder={props.setSelectedFolder}/>
             </nav>
         </div>
     );

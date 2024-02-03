@@ -44,16 +44,20 @@ export function decrypt(obj: any, salt = "NRLU") {
 //   return obj;
 // }
 
-// export function getFileTypeFromURI(uri: string) {
-//   const parts = uri.split('.');
-//   if (parts.length > 1) {
-//     const extension = parts[parts.length - 1].toLowerCase();
-//     return extension;
-//   } else {
-//     console.error('Unable to determine file type from URI.');
-//     return null;
-//   }
-// }
+export function getFileTypeFromURI(uri: string) {
+  const parts = uri.split('.');
+  if (parts.length > 1) {
+    const extension = parts[parts.length - 1].toLowerCase();
+    return extension;
+  } else {
+    console.error('Unable to determine file type from URI.');
+    return null;
+  }
+}
+
+export function getFileName(urlString: string) {
+  return urlString.substring(urlString.lastIndexOf('/') + 1);
+}
 
 export const transformResponse = (result: any) => result?.data;
 export const transformErrorResponse = (err: FetchBaseQueryError): IError => ({

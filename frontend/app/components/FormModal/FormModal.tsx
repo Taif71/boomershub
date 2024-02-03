@@ -1,0 +1,67 @@
+import React, { useState, useRef, useEffect } from 'react';
+import M from 'materialize-css/dist/js/materialize.min.js';
+import { useCreateFolderMutation } from '@/redux/features/apis/foldersapi';
+
+const FormModal = (props: any) => {
+  const [formData, setFormData] = useState({
+    name: '',
+  });
+
+  const [createFolder] = useCreateFolderMutation();
+
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    // Initialize the modal
+    const modalElement = modalRef.current;
+    M.Modal.init(modalElement, { coverTrigger: false });
+  }, []);
+
+  const handleChange = (e:any) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    // Add your form submission logic here
+    console.log('Form submitted:', formData);
+
+    createFolder({ data: formData});
+
+    // Close the modal
+    const modalInstance = M.Modal.getInstance(modalRef.current);
+    modalInstance.close();
+  };
+
+  return (
+    <div>
+      <a href="#modal1" className="modal-trigger btn">Open Form Modal</a>
+
+      <div id="modal1" className="modal" ref={modalRef}>
+        <div className="modal-content">
+          <h4>Create a new folder</h4>
+          <form onSubmit={handleSubmit}>
+            <div className="input-field">
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+              />
+              <label htmlFor="name">Folder name</label>
+            </div>            
+            <button type="submit" className="btn waves-effect waves-light">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default FormModal;

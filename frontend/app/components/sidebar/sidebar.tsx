@@ -18,7 +18,7 @@ const TreeviewTraversal = (props: any) => {
         <i className="material-icons blue-text text-darken-1">dashboard</i>MyDrive
       </div>
       {
-        isCollapse ? null : <FolderTreeView parent={null} status={true}></FolderTreeView>
+        isCollapse ? null : <FolderTreeView parent={null} status={true} setSelectedFolder={props.setSelectedFolder}></FolderTreeView>
       }
     </div>
 
@@ -27,7 +27,6 @@ const TreeviewTraversal = (props: any) => {
 
 const FolderTreeView = (props: any) => {
   const [isOpen, setIsOpen] = createSignal(true);
-  // const [localSelectedFolder, setLocalSelectedFolder] = useState(props.selectedFolder || null);
   const { data: folders }: any =
     useGetFoldersQuery(
       {
@@ -36,21 +35,23 @@ const FolderTreeView = (props: any) => {
         filter: JSON.stringify({
           isActive: true,
           isDeleted: false,
-          parent: props.parent || null
+          parent: props.parent && encodeURIComponent(props.parent) || undefined
         }),
       }, {
         skip: !props.status
       }
     ) || {};
 
-  const [selectedIndex, setSelectedIndex] = useState(-1);
-  const folderStatus = useRef(folders?.map((f: any) => false));
-  useEffect(() => {
-    folderStatus.current = folders?.map((f: any) => false);
-    if(selectedIndex!= -1) {
-      folderStatus.current[selectedIndex] = !folderStatus.current[selectedIndex];
-    }
-  }, [selectedIndex])
+    console.log(props.status, props.parent);
+
+  // const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [folderStatus, setFolderStatus] = useState<any>({ });
+  // useEffect(() => {
+  //   folderStatus.current = folders?.map((f: any) => false);
+  //   if(selectedIndex!= -1) {
+  //     folderStatus.current[selectedIndex] = !folderStatus.current[selectedIndex];
+  //   }
+  // }, [selectedIndex])
 
   return (
     <div>
@@ -61,15 +62,18 @@ const FolderTreeView = (props: any) => {
             >
               <div>
                 <div onClick={() => { 
-                  // const tempFolderStatus = [...folderStatus];
-                  // tempFolderStatus[index] = !tempFolderStatus[index];
-                  // folderStatus.current[index] = !folderStatus.current[index]
-                  setSelectedIndex(index);
+                  
+                  const status = folderStatus[item.id] || false
+                  const tempFolderStatus = {...folderStatus }
+                  tempFolderStatus[item.id] = !status;
+                  props.setSelectedFolder(item.id)
+                  setFolderStatus({ ...tempFolderStatus });
                 }}>
                   <i className="material-icons blue-text text-darken-1">folder</i>  {item.name}
                 </div>
+                
                 <FolderTreeView 
-                    status={index >= folderStatus.current?.length ? false : folderStatus.current[index]} 
+                    status={folderStatus[item.id] || false} 
                     parent={item.id} 
                     setSelectedFolder={props.setSelectedFolder} 
                 />
@@ -98,7 +102,7 @@ const SideBar = ({ children, setSelectedFolder }: any) => {
   return (
     <ul className="side-nav fixed floating transparent z-depth-0">
       <li className="active">
-        <TreeviewTraversal />
+        <TreeviewTraversal setSelectedFolder={setSelectedFolder}/>
       </li>
       <li>
         <a href="#">

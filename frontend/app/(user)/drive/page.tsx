@@ -14,24 +14,9 @@ const SideBarLayout = dynamic(
 
 const DrivePage = () => {
   const [selectedFolder, setSelectedFolder] = useState(null);
-
-  // const { data: folders } =
-  //   useGetFoldersQuery(
-  //     {
-  //       limit: 20,
-  //       skip: 0,
-  //       filter: JSON.stringify({
-  //         isActive: true,
-  //         isDeleted: false,
-          
-  //       }),
-  //     },
-  //     // { skip: !school }
-  //   ) || {};
-  // console.log("1" + folders)
   return (
     <div>
-      <NavBar></NavBar>
+      <NavBar selectedFolder={selectedFolder} setSelectedFolder={setSelectedFolder}></NavBar>
       <SideBarLayout selectedFolder={selectedFolder} setSelectedFolder={setSelectedFolder}></SideBarLayout>
       <ContentsArea selectedFolder={selectedFolder} setSelectedFolder={setSelectedFolder}></ContentsArea>
     </div>

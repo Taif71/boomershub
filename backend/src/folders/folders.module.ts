@@ -11,4 +11,4 @@ import { Folder } from './entities/folder.entity';
   controllers: [FoldersController],
   providers: [FoldersService]
 })
-export class FoldersModule {}
+export class FoldersModule { }

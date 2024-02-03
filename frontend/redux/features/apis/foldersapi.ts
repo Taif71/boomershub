@@ -9,8 +9,8 @@ export const foldersApi = createApi({
     credentials: "include",
   }),
   endpoints: (builder) => ({
-    createFolder: builder.mutation<IFolder, { data: IFolder }>({
-      query: ({ data }) => ({
+    createFolder: builder.mutation<IFolder, { data: any }>({
+      query: ({ data } : any) => ({
         url: "",
         method: "post",
         body: data,
