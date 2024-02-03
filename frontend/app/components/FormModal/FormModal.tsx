@@ -3,8 +3,10 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 import { useCreateFolderMutation } from '@/redux/features/apis/foldersapi';
 
 const FormModal = (props: any) => {
+  const [reloadCounter, setReloadCounter] = useState(0);
   const [formData, setFormData] = useState({
     name: '',
+    parent: undefined
   });
 
   const [createFolder] = useCreateFolderMutation();
@@ -27,13 +29,15 @@ const FormModal = (props: any) => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     // Add your form submission logic here
-    console.log('Form submitted:', formData);
-
-    createFolder({ data: formData});
-
+    // console.log('Form submitted:', formData);
+    createFolder({ data: 
+      {...formData, parent: props.selectedFolder  || null }
+    });
+    // && encodeURIComponent(props.selectedFolder)
     // Close the modal
     const modalInstance = M.Modal.getInstance(modalRef.current);
-    modalInstance.close();
+    modalInstance.close();    
+    setReloadCounter(0); // to refresh and rerender the component so that created folder is shown
   };
 
   return (

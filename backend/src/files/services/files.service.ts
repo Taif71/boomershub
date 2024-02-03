@@ -43,8 +43,6 @@ export class FilesService {
     );
     response.Location = awsLocation.Location;
     return response;
-
-
   }
 
   /**

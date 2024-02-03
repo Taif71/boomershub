@@ -22,7 +22,6 @@ const Folders = (props: any) => {
     const handleDeleteClick = (event: React.MouseEvent, folderId: string) => {
         event.stopPropagation(); // Prevent the click event from triggering the folder selection
         deleteFolder(folderId)   
-        setReloadCounter((prevCounter) => prevCounter + 1);
         setReloadCounter(0);
     };
 

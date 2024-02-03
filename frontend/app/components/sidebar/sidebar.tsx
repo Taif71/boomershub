@@ -30,29 +30,19 @@ const FolderTreeView = (props: any) => {
   const { data: folders }: any =
     useGetFoldersQuery(
       {
-        limit: 100,
-        skip: 0,
+        // limit: 100,
+        // skip: 0,
         filter: JSON.stringify({
           isActive: true,
           isDeleted: false,
-          parent: props.parent && encodeURIComponent(props.parent) || undefined
+          parent: props.parent && encodeURIComponent(props.parent) || null
         }),
       }, {
         skip: !props.status
       }
     ) || {};
 
-    console.log(props.status, props.parent);
-
-  // const [selectedIndex, setSelectedIndex] = useState(-1);
   const [folderStatus, setFolderStatus] = useState<any>({ });
-  // useEffect(() => {
-  //   folderStatus.current = folders?.map((f: any) => false);
-  //   if(selectedIndex!= -1) {
-  //     folderStatus.current[selectedIndex] = !folderStatus.current[selectedIndex];
-  //   }
-  // }, [selectedIndex])
-
   return (
     <div>
       {isOpen() && (

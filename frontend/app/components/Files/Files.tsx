@@ -10,11 +10,21 @@ const Files = (props: any) => {
                 limit: 100,
                 skip: 0,
                 filter: JSON.stringify({
-                    folder: props.selectedFolder || undefined
-                    // folder: null 
+                    folder: props.selectedFolder || null                   
                 }),
             }
         ) || {};
+
+        const handleDownload = (url: string) => {
+            const newTab = window.open(url, '_blank');
+            if (newTab) {
+                newTab.focus();
+              } else {
+                // Handle the case where pop-ups are blocked or the new tab couldn't be opened
+                console.error('Failed to open a new tab. Ensure pop-up blockers are disabled.');
+                // Optionally, provide a user-friendly message or an alternative download method
+              }
+          };
     
         const handleDeleteClick = (event: React.MouseEvent, folderId: string) => {
             event.stopPropagation(); // Prevent the click event from triggering the folder selection
@@ -33,7 +43,9 @@ const Files = (props: any) => {
                                 onClick={() => { props.setSelectedFolder(e.name) }}
                                 className="card-panel folder"
                             >
-                                <i className="material-icons left">folder</i>{`${getFileName(e.url)}`}
+                                <a href={e.url} download={`${getFileName(e.url)}`}>
+                                    <i className="material-icons left">description</i>{`${getFileName(e.url)}`}
+                                </a>
                             </div>
                             <div className="delete-icon" onClick={(event) => handleDeleteClick(event, e.id)}>
                                 <a
