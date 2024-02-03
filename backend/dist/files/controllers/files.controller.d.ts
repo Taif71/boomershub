@@ -16,10 +16,10 @@ export declare class FilesController {
     findOne(id: string): Promise<import("../entities/files.entity").File>;
     update(id: string, data: UpdateFileDto): Promise<{
         updatedAt: number;
-        folder: import("../../folders/entities/folder.entity").Folder;
-        url: string;
-        user: import("../../users/entities/user.entity").User;
         id: string;
+        url: string;
+        folder: import("../../folders/entities/folder.entity").Folder;
+        user: import("../../users/entities/user.entity").User;
         isActive: boolean;
         isDeleted: boolean;
     } & import("../entities/files.entity").File>;

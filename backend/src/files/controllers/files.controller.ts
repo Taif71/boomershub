@@ -149,6 +149,7 @@ export class FilesController {
   })
   @Patch(':id')
   update(@Param('id') id: string, @Body() data: UpdateFileDto) {
+    console.log(1)
     try {
       return this.filesService.update(id, data);
     } catch (err) {

@@ -25,10 +25,10 @@ export declare class FilesService {
     } & File>;
     update(id: string, data: UpdateFileDto): Promise<{
         updatedAt: number;
-        folder: Folder;
-        url: string;
-        user: User;
         id: string;
+        url: string;
+        folder: Folder;
+        user: User;
         isActive: boolean;
         isDeleted: boolean;
     } & File>;

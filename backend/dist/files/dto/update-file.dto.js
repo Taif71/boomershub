@@ -12,9 +12,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateFileDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const folder_entity_1 = require("../../folders/entities/folder.entity");
+const class_validator_1 = require("class-validator");
 class UpdateFileDto {
 }
 exports.UpdateFileDto = UpdateFileDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsUUID)(),
+    __metadata("design:type", String)
+], UpdateFileDto.prototype, "id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MaxLength)(500),
+    __metadata("design:type", String)
+], UpdateFileDto.prototype, "url", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", folder_entity_1.Folder)

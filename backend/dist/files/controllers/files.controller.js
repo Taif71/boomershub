@@ -37,6 +37,7 @@ let FilesController = class FilesController {
     }
     findAll(query, user) {
         try {
+            query.user = user.id;
             return this.filesService.findAll(query);
         }
         catch (err) {
@@ -56,6 +57,7 @@ let FilesController = class FilesController {
         }
     }
     update(id, data) {
+        console.log(1);
         try {
             return this.filesService.update(id, data);
         }
