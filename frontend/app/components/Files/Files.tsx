@@ -32,7 +32,7 @@ const Files = (props: any) => {
         };
 
     return (
-        <div className="main">
+        <div className="">
             <div className="container-fluid">
                 <p className="subheader">Files</p>
                 {
@@ -43,18 +43,19 @@ const Files = (props: any) => {
                                 onClick={() => { props.setSelectedFolder(e.name) }}
                                 className="card-panel folder"
                             >
-                                <a href={e.url} download={`${getFileName(e.url)}`}>
-                                    <i className="material-icons left">description</i>{`${getFileName(e.url)}`}
+                                <a href={e.url} download={`${getFileName(e.url)}`} style={{ display: "flex"}}>
+                                    <i className="material-icons">description</i>
+                                    <p style={{ margin: 0, padding: 0, marginLeft: 5 }}>{`${getFileName(e.url)}`}</p>
                                 </a>
                             </div>
-                            <div className="delete-icon" onClick={(event) => handleDeleteClick(event, e.id)}>
+                            {/* <div className="delete-icon" onClick={(event) => handleDeleteClick(event, e.id)}>
                                 <a
                                     className="dropdown-trigger delete-drop-down"
                                     data-target="delete-folder-dropdown"
                                 >
                                     <i className="material-icons right ">delete</i>
                                 </a>
-                            </div>
+                            </div> */}
                         </div>
                     ))
                 }

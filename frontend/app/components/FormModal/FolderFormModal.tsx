@@ -28,12 +28,9 @@ const FolderFormModal = (props: any) => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    // Add your form submission logic here
-    // console.log('Form submitted:', formData);
     createFolder({ data: 
       {...formData, parent: props.selectedFolder  || null }
     });
-    // && encodeURIComponent(props.selectedFolder)
     // Close the modal
     const modalInstance = M.Modal.getInstance(modalRef.current);
     modalInstance.close();    
@@ -42,11 +39,11 @@ const FolderFormModal = (props: any) => {
 
   return (
     <div>
-      <a href="#modal1" className="modal-trigger btn">Open Form Modal</a>
+      {/* <a href="#modal1" className="modal-trigger btn">Open Form Modal</a> */}
 
       <div id="modal1" className="modal" ref={modalRef}>
         <div className="modal-content">
-          <h4 >Create a new folder</h4>
+          <h4 style={{ color: "black"}}>Create a new folder</h4>
           <form onSubmit={handleSubmit}>
             <div className="input-field">
               <input

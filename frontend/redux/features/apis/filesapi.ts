@@ -10,8 +10,8 @@ export const filesApi = createApi({
     credentials: "include",
   }),
   endpoints: (builder) => ({
-    createFile: builder.mutation<IFiles, { data: IFiles }>({
-      query: ({ data }) => ({
+    createFile: builder.mutation<IFiles, FormData>({
+      query: (data) => ({
         url: "",
         method: "post",
         body: data,
