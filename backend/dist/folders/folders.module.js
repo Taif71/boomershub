@@ -12,13 +12,14 @@ const typeorm_1 = require("@nestjs/typeorm");
 const folders_service_1 = require("./folders.service");
 const folders_controller_1 = require("./folders.controller");
 const folder_entity_1 = require("./entities/folder.entity");
+const user_entity_1 = require("../users/entities/user.entity");
 let FoldersModule = class FoldersModule {
 };
 exports.FoldersModule = FoldersModule;
 exports.FoldersModule = FoldersModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forFeature([folder_entity_1.Folder])
+            typeorm_1.TypeOrmModule.forFeature([folder_entity_1.Folder, user_entity_1.User])
         ],
         controllers: [folders_controller_1.FoldersController],
         providers: [folders_service_1.FoldersService]

@@ -10,7 +10,8 @@ const Files = (props: any) => {
                 limit: 100,
                 skip: 0,
                 filter: JSON.stringify({
-                    parent: props.selectedFolder || undefined
+                    folder: props.selectedFolder || undefined
+                    // folder: null 
                 }),
             }
         ) || {};

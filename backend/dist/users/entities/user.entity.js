@@ -37,7 +37,7 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "lastName", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => folder_entity_1.Folder, folder => folder.id),
+    (0, typeorm_1.OneToMany)(() => folder_entity_1.Folder, folder => folder.user),
     __metadata("design:type", Array)
 ], User.prototype, "folders", void 0);
 exports.User = User = __decorate([

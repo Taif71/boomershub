@@ -14,6 +14,7 @@ const typeorm_1 = require("typeorm");
 const class_validator_1 = require("class-validator");
 const entities_1 = require("../../common/entities");
 const user_entity_1 = require("../../users/entities/user.entity");
+const files_entity_1 = require("../../files/entities/files.entity");
 let Folder = class Folder extends entities_1.BaseEntity {
 };
 exports.Folder = Folder;
@@ -31,9 +32,13 @@ __decorate([
     __metadata("design:type", Array)
 ], Folder.prototype, "children", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, user => user.id),
+    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, user => user.folders),
     __metadata("design:type", user_entity_1.User)
 ], Folder.prototype, "user", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => files_entity_1.File, file => file.folder),
+    __metadata("design:type", Array)
+], Folder.prototype, "files", void 0);
 exports.Folder = Folder = __decorate([
     (0, typeorm_1.Entity)({ name: 'folder' })
 ], Folder);

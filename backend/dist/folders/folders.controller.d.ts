@@ -14,12 +14,14 @@ export declare class FoldersController {
     findAll(query: any, user: IUser): Promise<import("./entities/folder.entity").Folder[]>;
     findOne(id: string): Promise<import("./entities/folder.entity").Folder>;
     update(id: string, data: UpdateFolderDto): Promise<{
+        updatedAt: number;
         id: string;
         name: string;
         folder?: import("./entities/folder.entity").Folder;
         user: import("../users/entities/user.entity").User;
         parent: import("./entities/folder.entity").Folder;
         children: import("./entities/folder.entity").Folder[];
+        files: import("../files/entities/files.entity").File[];
         isActive: boolean;
         isDeleted: boolean;
     } & import("./entities/folder.entity").Folder>;

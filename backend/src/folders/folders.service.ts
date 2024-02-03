@@ -4,12 +4,13 @@ import {
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { IsNull, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Folder } from './entities/folder.entity';
 import { CreateFolderDto } from './dto/create-folder.dto';
 import { UpdateFolderDto } from './dto/update-folder.dto';
 import { IUser } from '../users/interfaces/user.interface';
+import { User } from '../users/entities/user.entity';
 
 @Injectable()
 export class FoldersService {
@@ -20,6 +21,8 @@ export class FoldersService {
   constructor(
     @InjectRepository(Folder)
     private readonly repo: Repository<Folder>,
+    @InjectRepository(User)
+    private readonly userRepo: Repository<User>,
   ) { }
 
   /**
@@ -42,34 +45,36 @@ export class FoldersService {
    */
   async findAll(query) {
     try {
-      const queryParam = query && query?.filter ? JSON.parse(query.filter) : {};
+      query && query?.filter && (query.filter = JSON.parse(query.filter));
+      let queryParam: any = {};
+      if (query && query?.user) {
+        queryParam.user = await this.userRepo.findOne({
+          where: {
+            id: query.user
+          }
+        })
+      }
+
+      if (query && query?.filter) {
+        if (query.filter?.parent === null) {
+          query.filter.parent = IsNull();
+        } else if (query.filter?.parent) {
+          query.filter.parent = await this.repo.findOne({
+            where: {
+              id: query.filter.parent
+            }
+          })
+        }
+      }
 
 
-      // const x = [{
-      //   "id": "49e6d06e-e2e7-4bef-b456-d2e5e680c558",
-      //   "isActive": true,
-      //   "isDeleted": false,
-      //   "name": `folder-${Math.random()}`,
-      //   "user": {
-      //     "id": "9e2f4917-d882-43c3-8c4e-de0db9f75a1a",
-      //     "isActive": true,
-      //     "isDeleted": false,
-      //     "email": "john@gmail.com",
-      //     "password": "$2b$08$B9UPe04uIcD2zfitxc6gm.trLsDgU04t/JTAB7UKmva3m7XrgHzq2",
-      //     "firstName": null,
-      //     "lastName": null
-      //   },
-      //   "parent": null,
-      //   "children": [
-      //     {
-      //       "id": "4b061520-019f-41c3-9e86-b510972a4786",
-      //       "isActive": true,
-      //       "isDeleted": false,
-      //       "name": "folder-ttl"
-      //     }
-      //   ]
-      // }]
-      // return x;
+      if (query && query?.filter) {
+        queryParam = {
+          ...queryParam,
+          ...query.filter,
+        }
+      }
+
       return await this.repo.find({
         where: queryParam,
         relations: ['user', 'parent', 'children'],
@@ -119,12 +124,13 @@ export class FoldersService {
       });
 
       if (!record) {
-        throw new NotFoundException(`Folder #${id} not found`);
+        throw new NotFoundException(`Record #${id} not found`);
       }
 
       return await this.repo.save({
         ...record,
         ...data,
+        updatedAt: Date.now()
       });
     } catch (err) {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);

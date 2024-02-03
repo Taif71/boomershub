@@ -23,7 +23,7 @@ __decorate([
     __metadata("design:type", String)
 ], File.prototype, "url", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => folder_entity_1.Folder, folder => folder.id),
+    (0, typeorm_1.ManyToOne)(() => folder_entity_1.Folder, folder => folder.files),
     __metadata("design:type", folder_entity_1.Folder)
 ], File.prototype, "folder", void 0);
 exports.File = File = __decorate([

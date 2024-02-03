@@ -9,12 +9,12 @@ const Folders = (props: any) => {
     const { data: folders }: any =
         useGetFoldersQuery(
             {
-                limit: 100,
-                skip: 0,
+                // limit: 100,
+                // skip: 0,
                 filter: JSON.stringify({
                     isActive: true,
                     isDeleted: false,
-                    parent: props.selectedFolder && encodeURIComponent(props.selectedFolder) || undefined
+                    parent: props.selectedFolder && encodeURIComponent(props.selectedFolder) || null
                 }),
             }
         ) || {};
@@ -26,6 +26,8 @@ const Folders = (props: any) => {
         setReloadCounter(0);
     };
 
+    console.log({ folders })
+
     return (
         <div className="main">
             <div className="container-fluid">
@@ -34,7 +36,7 @@ const Folders = (props: any) => {
                     folders?.map((e: any) => (
                         <div
                             key={e.id}
-                            onClick={() => { props.setSelectedFolder(e.name) }}
+                            onClick={() => { props.setSelectedFolder(e.id) }}
                             className="card-panel folder"
                         >
                             <i className="material-icons left">folder</i>{e.name}

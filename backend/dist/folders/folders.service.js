@@ -17,9 +17,11 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("typeorm");
 const typeorm_2 = require("@nestjs/typeorm");
 const folder_entity_1 = require("./entities/folder.entity");
+const user_entity_1 = require("../users/entities/user.entity");
 let FoldersService = class FoldersService {
-    constructor(repo) {
+    constructor(repo, userRepo) {
         this.repo = repo;
+        this.userRepo = userRepo;
     }
     async create(data, user) {
         try {
@@ -31,7 +33,33 @@ let FoldersService = class FoldersService {
     }
     async findAll(query) {
         try {
-            const queryParam = query && query?.filter ? JSON.parse(query.filter) : {};
+            query && query?.filter && (query.filter = JSON.parse(query.filter));
+            let queryParam = {};
+            if (query && query?.user) {
+                queryParam.user = await this.userRepo.findOne({
+                    where: {
+                        id: query.user
+                    }
+                });
+            }
+            if (query && query?.filter) {
+                if (query.filter?.parent === null) {
+                    query.filter.parent = (0, typeorm_1.IsNull)();
+                }
+                else if (query.filter?.parent) {
+                    query.filter.parent = await this.repo.findOne({
+                        where: {
+                            id: query.filter.parent
+                        }
+                    });
+                }
+            }
+            if (query && query?.filter) {
+                queryParam = {
+                    ...queryParam,
+                    ...query.filter,
+                };
+            }
             return await this.repo.find({
                 where: queryParam,
                 relations: ['user', 'parent', 'children'],
@@ -66,11 +94,12 @@ let FoldersService = class FoldersService {
                 },
             });
             if (!record) {
-                throw new common_1.NotFoundException(`Folder #${id} not found`);
+                throw new common_1.NotFoundException(`Record #${id} not found`);
             }
             return await this.repo.save({
                 ...record,
                 ...data,
+                updatedAt: Date.now()
             });
         }
         catch (err) {
@@ -90,6 +119,8 @@ exports.FoldersService = FoldersService;
 exports.FoldersService = FoldersService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_2.InjectRepository)(folder_entity_1.Folder)),
-    __metadata("design:paramtypes", [typeorm_1.Repository])
+    __param(1, (0, typeorm_2.InjectRepository)(user_entity_1.User)),
+    __metadata("design:paramtypes", [typeorm_1.Repository,
+        typeorm_1.Repository])
 ], FoldersService);
 //# sourceMappingURL=folders.service.js.map
