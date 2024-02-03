@@ -74,10 +74,11 @@ export class FilesController {
   @Post()
   async create(
     @Body() data: CreateFileDto,
+    @User() user: IUser,
     @UploadedFile() file: Express.Multer.File,
   ) {
     try {
-      return await this.filesService.create(data, file);
+      return await this.filesService.create(data, user, file);
     } catch (err) {
       throw new HttpException(err, err.status || HttpStatus.BAD_REQUEST);
     }
@@ -88,7 +89,7 @@ export class FilesController {
    * @Param {string} query
    */
   @ApiOperation({ summary: 'Fetches records' })
-  @ApiResponse({ status: 200, description: 'Returns list of files'})
+  @ApiResponse({ status: 200, description: 'Returns list of records.' })
   @Get()
   findAll(
     @Query() query,
@@ -111,11 +112,11 @@ export class FilesController {
    * Fetch a record by id 
    * @Param {string} id
    */
-  @ApiOperation({ summary: 'Get a FILE by id' })
-  @ApiResponse({ status: 200, description: 'Returns FILE.' })
+  @ApiOperation({ summary: 'Get a record by id' })
+  @ApiResponse({ status: 200, description: 'Returns record.' })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
-    description: 'FILE Not found.',
+    description: 'Record Not found.',
   })
   @Get(':id')
   findOne(@Param('id') id: string) {
@@ -139,11 +140,11 @@ export class FilesController {
   @UsePipes(new NullValidationPipe())
   @UsePipes(new ValidationPipe(true))
   @UsePipes(new TrimPipe())
-  @ApiOperation({ summary: 'Update File' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'Return File' })
+  @ApiOperation({ summary: 'Update record' })
+  @ApiResponse({ status: HttpStatus.OK, description: 'Return record' })
   @ApiResponse({
     status: HttpStatus.NOT_FOUND,
-    description: 'File not found',
+    description: 'Record not found',
   })
   @Patch(':id')
   update(@Param('id') id: string, @Body() data: UpdateFileDto) {

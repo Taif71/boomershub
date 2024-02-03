@@ -19,10 +19,14 @@ const typeorm_1 = require("typeorm");
 const typeorm_2 = require("@nestjs/typeorm");
 const services_1 = require("../services");
 const files_entity_1 = require("../entities/files.entity");
+const user_entity_1 = require("../../users/entities/user.entity");
+const folder_entity_1 = require("../../folders/entities/folder.entity");
 let FilesService = FilesService_1 = class FilesService {
-    constructor(repo, awsS3Service) {
+    constructor(repo, awsS3Service, userRepo, folderRepo) {
         this.repo = repo;
         this.awsS3Service = awsS3Service;
+        this.userRepo = userRepo;
+        this.folderRepo = folderRepo;
         this.logger = new common_1.Logger(FilesService_1.name);
     }
     async upload(file) {
@@ -34,11 +38,11 @@ let FilesService = FilesService_1 = class FilesService {
         response.Location = awsLocation.Location;
         return response;
     }
-    async create(data, file) {
+    async create(data, user, file) {
         try {
             const fileLocation = await this.upload(file);
             data.url = fileLocation.Location;
-            return await this.repo.save(data);
+            return await this.repo.save({ ...data, user: user });
         }
         catch (err) {
             throw new common_1.HttpException(err, common_1.HttpStatus.BAD_REQUEST);
@@ -56,7 +60,8 @@ let FilesService = FilesService_1 = class FilesService {
             }
             return await this.repo.save({
                 ...record,
-                ...data
+                ...data,
+                updatedAt: Date.now()
             });
         }
         catch (err) {
@@ -65,7 +70,33 @@ let FilesService = FilesService_1 = class FilesService {
     }
     async findAll(query) {
         try {
-            const queryParam = query && query?.filter ? JSON.parse(query.filter) : {};
+            query && query?.filter && (query.filter = JSON.parse(query.filter));
+            let queryParam = {};
+            if (query && query?.user) {
+                queryParam.user = await this.userRepo.findOne({
+                    where: {
+                        id: query.user
+                    }
+                });
+            }
+            if (query && query?.filter) {
+                if (query.filter?.folder === null) {
+                    query.filter.folder = (0, typeorm_1.IsNull)();
+                }
+                else if (query.filter?.folder) {
+                    query.filter.folder = await this.folderRepo.findOne({
+                        where: {
+                            id: query.filter.folder
+                        }
+                    });
+                }
+            }
+            if (query && query?.filter) {
+                queryParam = {
+                    ...queryParam,
+                    ...query.filter,
+                };
+            }
             return await this.repo.find({
                 where: queryParam,
                 relations: ['folder'],
@@ -105,7 +136,11 @@ exports.FilesService = FilesService;
 exports.FilesService = FilesService = FilesService_1 = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_2.InjectRepository)(files_entity_1.File)),
+    __param(2, (0, typeorm_2.InjectRepository)(user_entity_1.User)),
+    __param(3, (0, typeorm_2.InjectRepository)(folder_entity_1.Folder)),
     __metadata("design:paramtypes", [typeorm_1.Repository,
-        services_1.AwsS3Service])
+        services_1.AwsS3Service,
+        typeorm_1.Repository,
+        typeorm_1.Repository])
 ], FilesService);
 //# sourceMappingURL=files.service.js.map

@@ -14,13 +14,15 @@ const services_1 = require("./services");
 const files_controller_1 = require("./controllers/files.controller");
 const files_service_1 = require("./services/files.service");
 const files_entity_1 = require("./entities/files.entity");
+const user_entity_1 = require("../users/entities/user.entity");
+const folder_entity_1 = require("../folders/entities/folder.entity");
 let FilesModule = class FilesModule {
 };
 exports.FilesModule = FilesModule;
 exports.FilesModule = FilesModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forFeature([files_entity_1.File])
+            typeorm_1.TypeOrmModule.forFeature([files_entity_1.File, user_entity_1.User, folder_entity_1.Folder])
         ],
         controllers: [controllers_1.AwsS3Controller, files_controller_1.FilesController],
         providers: [
