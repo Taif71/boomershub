@@ -1,5 +1,4 @@
 "use client"
-import { folderTreeView } from "@/dummy/dummy";
 import { useGetFoldersQuery } from "@/redux/features/apis/foldersapi";
 import { useEffect, useRef, useState } from "react";
 import { createSignal, onCleanup } from 'solid-js';
@@ -14,8 +13,8 @@ const TreeviewTraversal = (props: any) => {
 
   return (
     <div>
-      <div onClick={handleOnClick} style={{ cursor: 'pointer' }}>
-        <i className="material-icons blue-text text-darken-1">dashboard</i>MyDrive
+      <div onClick={handleOnClick} style={{ cursor: 'pointer', display: "flex", alignItems: "center", listStyleType: 'none', marginLeft: '15px'}}>
+        <i className="material-icons blue-text text-darken-1">dashboard</i><p style={{ margin: 0, padding: 0, marginLeft: 24}}>MyDrive</p>
       </div>
       {
         isCollapse ? null : <FolderTreeView parent={null} status={true} setSelectedFolder={props.setSelectedFolder}></FolderTreeView>

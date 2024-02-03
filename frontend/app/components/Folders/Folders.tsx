@@ -28,31 +28,58 @@ const Folders = (props: any) => {
     console.log({ folders })
 
     return (
-        <div className="main">
-            <div className="container-fluid">
+        <div className="">
+            <div className="container-fluid" >
                 <p className="subheader">Folders</p>
+                <div style={{ display: "flex"}}>
                 {
                     folders?.map((e: any) => (
                         <div
                             key={e.id}
                             onClick={() => { props.setSelectedFolder(e.id) }}
                             className="card-panel folder"
+                            style={{ margin: 3, display: "flex", justifyContent: "space-between"}}
                         >
-                            <i className="material-icons left">folder</i>{e.name}
+                           <div style={{ display: "flex"}}>
+                                <i className="material-icons">folder</i>
+                                <p style={{ margin: 0, padding: 0, marginLeft: 5}}>{e.name}</p>
+                           </div>
 
                             <div className="delete-icon" onClick={(event) => handleDeleteClick(event, e.id)}>
                                 <a
                                     className="dropdown-trigger delete-drop-down"
                                     data-target="delete-folder-dropdown"
                                 >
-                                    <i className="material-icons right ">delete</i>
+                                    <i className="material-icons">delete</i>
                                 </a>
                             </div>
                         </div>
 
+                     
+                    //          <div
+                    //     key={e.id}
+                    //     onClick={() => { props.setSelectedFolder(e.id) }}
+                    //     className="card-panel folder row"
+                    //     // style={{ margin: 3, display: "flex", justifyContent: "space-between"}}
+                    // >
+                    //     <i className="material-icons col s2">folder</i>
+                    //     <p className="col s7" style={{ margin: 0, padding: 0}}>{e.name}</p>
+
+                    //     <div className="delete-icon col s3" onClick={(event) => handleDeleteClick(event, e.id)}>
+                    //         <a
+                    //             className="dropdown-trigger delete-drop-down"
+                    //             data-target="delete-folder-dropdown"
+                    //         >
+                    //             <i className="material-icons">delete</i>
+                    //         </a>
+                    //     </div>
+                    //     </div>
+                    
+
 
                     ))
                 }
+                </div>                
             </div>
         </div>
     );
