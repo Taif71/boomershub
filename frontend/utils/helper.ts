@@ -65,6 +65,15 @@ export const transformErrorResponse = (err: FetchBaseQueryError): IError => ({
   statusCode: err.status,
 });
 
+export function downloadFile (url: string, fileName: string) {
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = fileName || ''; // You can provide a default file name
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
 // export const hasError = (result: any): boolean => {
 //   if ("error" in result) {
 //     const { error } = result;

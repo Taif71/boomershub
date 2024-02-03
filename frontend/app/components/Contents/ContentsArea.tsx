@@ -1,6 +1,4 @@
-import { folderTreeView } from "@/dummy/dummy";
 import Folders from "../Folders/Folders";
-import { useGetFoldersQuery } from "@/redux/features/apis/foldersapi";
 import Files from "../Files/Files";
 
 const ContentsArea = (props: any) => {

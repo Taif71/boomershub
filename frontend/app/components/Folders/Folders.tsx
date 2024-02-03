@@ -25,8 +25,6 @@ const Folders = (props: any) => {
         setReloadCounter(0);
     };
 
-    console.log({ folders })
-
     return (
         <div className="">
             <div className="container-fluid" >
@@ -38,7 +36,7 @@ const Folders = (props: any) => {
                             key={e.id}
                             onClick={() => { props.setSelectedFolder(e.id) }}
                             className="card-panel folder"
-                            style={{ margin: 3, display: "flex", justifyContent: "space-between"}}
+                            style={{ margin: 6, display: "flex", justifyContent: "space-between"}}
                         >
                            <div style={{ display: "flex"}}>
                                 <i className="material-icons">folder</i>

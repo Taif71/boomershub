@@ -1,31 +1,27 @@
-import React, { useEffect, useRef, useState } from 'react';
-import 'materialize-css/dist/css/materialize.min.css';
-import M from 'materialize-css/dist/js/materialize.min.js';
+"use client"
+import React, { useEffect, useRef } from 'react';
+// import 'materialize-css/dist/css/materialize.min.css';
+// import M from 'materialize-css/dist/js/materialize.min.js';
 import FileFormModal from '../FormModal/FileFormModal';
 import FolderFormModal from '../FormModal/FolderFormModal';
 
+
 const CreateOptionsComponent = (props: any) => {
-  const [showFolderModal, updateShowFolderModal] = useState(false);
-  const [showFileModal, updateShowFileModal] = useState(false);
-  const modalRef = useRef(null);
+  const modalRef = useRef<any>(null);
   useEffect(() => {
     // Initialize the dropdown
-    const dropdownTrigger = document.querySelector('.dropdown-trigger');
-    if (dropdownTrigger) {
-      M.Dropdown.init(dropdownTrigger, { coverTrigger: false });
-    }    
-
-    const modalElement = modalRef.current;
-    M.Modal.init(modalElement, { coverTrigger: false });
+    const mFunc = async () => {
+      const M: any = await import("materialize-css/dist/js/materialize.min.js");
+      const dropdownTrigger = document.querySelector('.dropdown-trigger');
+      if (dropdownTrigger) {
+        M.Dropdown.init(dropdownTrigger, { coverTrigger: false });
+      }    
+  
+      const modalElement = modalRef.current;
+      M.Modal.init(modalElement);     
+    }
+    mFunc()
   }, []);
-
-  const onFolderClick = async (values: any) => {
-    updateShowFolderModal(!showFolderModal);
-  };
-
-  const onFileClick = async (values: any) => {
-    updateShowFileModal(!showFileModal);
-  };
 
   return (
     <div className="nav-wrapper nav-2">
@@ -43,7 +39,7 @@ const CreateOptionsComponent = (props: any) => {
             <i className="material-icons">view_module</i>Create a folder
           </a>
         </li>
-        <li onClick={onFileClick}>
+        <li>
           <a href="#modal2"
              className="modal-trigger" 
           >
@@ -55,28 +51,6 @@ const CreateOptionsComponent = (props: any) => {
       {/* Conditionally render the modal based on showOptions */}
       { <FolderFormModal selectedFolder={props.selectedFolder}/>} 
       { <FileFormModal selectedFolder={props.selectedFolder}/>}    
-     
-      {/* <div id="modal1" className="modal" ref={modalRef}>
-        <div className="modal-content">
-          <h4 >Create a new folder</h4>
-          <form >
-            <div className="input-field">
-              <input
-                type="text"
-                id="name"
-                name="name"
-                // value=
-                // onChange={handleChange}
-              />
-              <label htmlFor="name">Folder name</label>
-            </div>            
-            <button type="submit" className="btn waves-effect waves-light">
-              Submit
-            </button>
-          </form>
-        </div> */}
-      {/* </div> */}
-
     </div>
   );
 };

@@ -1,7 +1,7 @@
 "use client"
 import { useGetFoldersQuery } from "@/redux/features/apis/foldersapi";
-import { useEffect, useRef, useState } from "react";
-import { createSignal, onCleanup } from 'solid-js';
+import { useState } from "react";
+import { createSignal } from 'solid-js';
 
 
 const TreeviewTraversal = (props: any) => {

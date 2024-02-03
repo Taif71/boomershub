@@ -1,3 +1,4 @@
+"use client"
 import CreateOptionsComponent from "../createoptions/CreateOptionsComponent";
 import { useLogoutMutation } from "@/redux/features/apis/auth-api";
 

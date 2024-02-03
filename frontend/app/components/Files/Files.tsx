@@ -1,5 +1,5 @@
 import { useGetFilesQuery } from "@/redux/features/apis/filesapi";
-import { getFileName } from "@/utils/helper";
+import { downloadFile, getFileName } from "@/utils/helper";
 
 
 
@@ -16,14 +16,8 @@ const Files = (props: any) => {
         ) || {};
 
         const handleDownload = (url: string) => {
-            const newTab = window.open(url, '_blank');
-            if (newTab) {
-                newTab.focus();
-              } else {
-                // Handle the case where pop-ups are blocked or the new tab couldn't be opened
-                console.error('Failed to open a new tab. Ensure pop-up blockers are disabled.');
-                // Optionally, provide a user-friendly message or an alternative download method
-              }
+            const fileName = getFileName(url);
+            downloadFile (url, fileName);
           };
     
         const handleDeleteClick = (event: React.MouseEvent, folderId: string) => {
@@ -37,26 +31,17 @@ const Files = (props: any) => {
                 <p className="subheader">Files</p>
                 {
                     files?.map((e: any) => (
-                        <div>
+
                             <div
                                 key={e.id}
                                 onClick={() => { props.setSelectedFolder(e.name) }}
                                 className="card-panel folder"
                             >
-                                <a href={e.url} download={`${getFileName(e.url)}`} style={{ display: "flex"}}>
+                                <a href={e.url} onClick={() => handleDownload(e.url)} download={`${getFileName(e.url)}`} style={{ display: "flex"}}>
                                     <i className="material-icons">description</i>
                                     <p style={{ margin: 0, padding: 0, marginLeft: 5 }}>{`${getFileName(e.url)}`}</p>
                                 </a>
-                            </div>
-                            {/* <div className="delete-icon" onClick={(event) => handleDeleteClick(event, e.id)}>
-                                <a
-                                    className="dropdown-trigger delete-drop-down"
-                                    data-target="delete-folder-dropdown"
-                                >
-                                    <i className="material-icons right ">delete</i>
-                                </a>
-                            </div> */}
-                        </div>
+                            </div>                                              
                     ))
                 }
             </div>

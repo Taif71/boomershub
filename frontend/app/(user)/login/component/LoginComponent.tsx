@@ -80,7 +80,7 @@ const LoginComponent = () => {
 
                                 <br />
                                 <center>
-                                    <div className='row'>
+                                    <div className='row' style={{ marginBottom: 10}}>
                                         <button type='submit' name='btn_login' className='col s12 btn btn-large waves-effect indigo'>Login</button>
                                     </div>
                                 </center>

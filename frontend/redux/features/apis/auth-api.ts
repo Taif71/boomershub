@@ -37,7 +37,7 @@ export const authApi = createApi({
               },
             });
             if (cookieSetResp.ok) {
-              window.location.reload();
+              window.location.reload();              
             } else {
               return {
                 error: cookieSetResp
@@ -79,8 +79,10 @@ export const authApi = createApi({
               "CONTENT-TYPE": "application/json",
             },
           });          
-          if (response.ok) {            
-            window.location.href = isAdmin ? '/login' : '/drive';            
+          if (response.ok) {     
+            
+              // Code that depends on window can be placed here
+              window.location.href = isAdmin ? '/login' : '/drive';                       
           }
         } catch (err: any) {                    
           return { error: err?.message };

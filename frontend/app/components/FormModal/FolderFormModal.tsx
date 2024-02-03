@@ -1,6 +1,15 @@
+"use client"
 import React, { useState, useRef, useEffect } from 'react';
-import M from 'materialize-css/dist/js/materialize.min.js';
+// import M from 'materialize-css/dist/js/materialize.min.js';
 import { useCreateFolderMutation } from '@/redux/features/apis/foldersapi';
+import dynamic from 'next/dynamic';
+
+const M: any = dynamic(
+  () => import("materialize-css/dist/js/materialize.min.js"),
+  {
+    ssr: false,
+  }
+  );
 
 const FolderFormModal = (props: any) => {
   const [reloadCounter, setReloadCounter] = useState(0);
@@ -11,12 +20,17 @@ const FolderFormModal = (props: any) => {
 
   const [createFolder] = useCreateFolderMutation();
 
-  const modalRef = useRef(null);
+  const modalRef = useRef<any>(null);
 
   useEffect(() => {
     // Initialize the modal
-    const modalElement = modalRef.current;
-    M.Modal.init(modalElement, { coverTrigger: false });
+    const mFunc = async () => {
+      const M: any = await import("materialize-css/dist/js/materialize.min.js");
+        const modalElement = modalRef.current;
+        M.Modal.init(modalElement);      
+    }
+    mFunc()
+   
   }, []);
 
   const handleChange = (e:any) => {
