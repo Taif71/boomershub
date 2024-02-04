@@ -1,4 +1,4 @@
-# School Integral Guidelines
+# Boomershub Guidelines
 
 ## PLEASE READ
 
