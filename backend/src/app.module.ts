@@ -11,6 +11,8 @@ import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpErrorFilter } from './common/filters';
 import { LoggingInterceptor, TransformInterceptor } from './common/interceptor';
 import { ReplaceAuthorizationHeaderFromCookie } from './common/middleware/replace-authorization-header.middleware';
+import { UsersService } from './users/users.service';
+import { User } from './users/entities/user.entity';
 
 @Module({
   imports: [
@@ -18,8 +20,8 @@ import { ReplaceAuthorizationHeaderFromCookie } from './common/middleware/replac
     FilesModule,
     UsersModule,
     AuthModule,
-    FoldersModule
-
+    FoldersModule,
+    TypeOrmModule.forFeature([User])
   ],
   controllers: [AppController],
   providers: [
@@ -36,6 +38,7 @@ import { ReplaceAuthorizationHeaderFromCookie } from './common/middleware/replac
       provide: APP_INTERCEPTOR,
       useClass: TransformInterceptor,
     },
+    UsersService
   ],
 })
 export class AppModule implements NestModule {
