@@ -2,11 +2,11 @@ import { NestFactory } from '@nestjs/core';
 import { Logger } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import * as helmet from 'helmet';
 import * as cookieParser from 'cookie-parser';
 import * as compression from 'compression';
 import * as fs from 'fs';
 import 'dotenv/config';
+import helmet from 'helmet';
 
 const PORT = process.env.PORT || 8080;
 

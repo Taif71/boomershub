@@ -1,16 +1,16 @@
 version: "3.8"
 services:
-  nginx:
-    image: nginx
-    container_name: nginx
-    build:
-      context: ../nginx
-      dockerfile: Dockerfile
-    ports:
-      - "80:80"
-    networks:
-      boomershub:
-          ipv4_address: 162.168.1.2
+  # nginx:
+  #   image: nginx
+  #   container_name: nginx
+  #   build:
+  #     context: ../nginx
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "80:80"
+  #   networks:
+  #     boomershub:
+  #         ipv4_address: 162.168.1.2
   mysql:
     container_name: mysql
     image: mysql:5.7
@@ -26,46 +26,46 @@ services:
       boomershub:
         ipv4_address: 162.168.1.5
 
-  frontend:
-    user: root
-    container_name: frontend
-    build:
-      context: ../frontend
-      dockerfile: Dockerfile
-    restart: always
-    ports:
-      - "9000:3000"
-    networks:
-      boomershub:
-        ipv4_address: 162.168.1.7
+  # frontend:
+  #   user: root
+  #   container_name: frontend
+  #   build:
+  #     context: ../frontend
+  #     dockerfile: Dockerfile
+  #   restart: always
+  #   ports:
+  #     - "9000:3000"
+  #   networks:
+  #     boomershub:
+  #       ipv4_address: 162.168.1.7
         
-  backend:
-    user: root
-    container_name: backend
-    build:
-      context: ../backend
-      dockerfile: Dockerfile
-    restart: always
-    ports:
-      - 5007:5007
-    depends_on:
-      - mysql
-    environment:
-      - PORT=5007
-      - MYSQL_DB_USERNAME=root
-      - MYSQL_DATABASE=boomershubDB
-      - MYSQL_DB_PORT=3306
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DB_HOST=mysql
-      - AWS_S3_BUCKET=boomers-bucket
-      - AWS_REGION=us-east-1
-      - AWS_ACCESS_KEY_ID=AKIATECJNGWHAJQLWP43
-      - AWS_S3_BUCKET_FOLDER=boomers
-      - AWS_SECRET_ACCESS_KEY=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
-      - SECRET_KEY_JWT=eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiU3VwZXIgQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IiQyYSQwOCQ3ZWhzMWtRWXU1YkZMRUtSUWw2Y0VlUURHMXVIcjZMWkVycWpPNFNMNGxaMmpSVDNpNC5kUyIsImV4cCI6MTYxNDcwOTQ5OCwiaWF0IjoxNjE0NzA5NDk4fQ.NBPiLlPHByxSpXZzGblYJ_rWGjvyGtRDUPViR34kFmI
-    networks:
-      boomershub:
-        ipv4_address: 162.168.1.11
+  # backend:
+  #   user: root
+  #   container_name: backend
+  #   build:
+  #     context: ../backend
+  #     dockerfile: Dockerfile
+  #   restart: always
+  #   ports:
+  #     - 5007:5007
+  #   depends_on:
+  #     - mysql
+  #   environment:
+  #     - PORT=5007
+  #     - MYSQL_DB_USERNAME=root
+  #     - MYSQL_DATABASE=boomershubDB
+  #     - MYSQL_DB_PORT=3306
+  #     - MYSQL_ROOT_PASSWORD=password
+  #     - MYSQL_DB_HOST=mysql
+  #     - AWS_S3_BUCKET=boomers-bucket
+  #     - AWS_REGION=us-east-1
+  #     - AWS_ACCESS_KEY_ID=AKIATECJNGWHAJQLWP43
+  #     - AWS_S3_BUCKET_FOLDER=boomers
+  #     - AWS_SECRET_ACCESS_KEY=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
+  #     - SECRET_KEY_JWT=eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiU3VwZXIgQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IiQyYSQwOCQ3ZWhzMWtRWXU1YkZMRUtSUWw2Y0VlUURHMXVIcjZMWkVycWpPNFNMNGxaMmpSVDNpNC5kUyIsImV4cCI6MTYxNDcwOTQ5OCwiaWF0IjoxNjE0NzA5NDk4fQ.NBPiLlPHByxSpXZzGblYJ_rWGjvyGtRDUPViR34kFmI
+  #   networks:
+  #     boomershub:
+  #       ipv4_address: 162.168.1.11
 networks:
   boomershub:
     driver: bridge
