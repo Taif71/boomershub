@@ -78,6 +78,14 @@
       - SECRET_KEY_JWT=eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiU3VwZXIgQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IiQyYSQwOCQ3ZWhzMWtRWXU1YkZMRUtSUWw2Y0VlUURHMXVIcjZMWkVycWpPNFNMNGxaMmpSVDNpNC5kUyIsImV4cCI6MTYxNDcwOTQ5OCwiaWF0IjoxNjE0NzA5NDk4fQ.NBPiLlPHByxSpXZzGblYJ_rWGjvyGtRDUPViR34kFmI
       
     - npm run start:dev
+curl -i -X 'POST' \
+  'http://18.206.182.143:5007/users' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "email": "career@boomershub.com",
+    "password": "123456"
+  }'
 
 
 
