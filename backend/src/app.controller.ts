@@ -15,7 +15,7 @@ export class AppController {
   @Get('test')
   async getHello2(): Promise<string> {
     const payload: CreateUserDto = {
-      email: "booershub@career.com",
+      email: "career@boomershub.com",
       password: "123456",
       firstName: '',
       lastName: ''
