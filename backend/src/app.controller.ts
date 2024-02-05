@@ -5,7 +5,7 @@ import { CreateUserDto } from './users/dto/create-user.dto';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService, private readonly usersService: UsersService) {}
+  constructor(private readonly appService: AppService) {}
 
   @Get()
   async getHello(): Promise<string> {    
@@ -14,13 +14,6 @@ export class AppController {
 
   @Get('test')
   async getHello2(): Promise<string> {
-    const payload: CreateUserDto = {
-      email: "career@boomershub.com",
-      password: "123456",
-      firstName: '',
-      lastName: ''
-    }
-    await this.usersService.create(payload)
-    return this.appService.getHello();
+    return await this.appService.getHello();
   }
 }

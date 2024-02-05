@@ -1,0 +1,14 @@
+// .devcontainer/devcontainer.json
+{
+  "name": "Node.js Development",
+  "dockerFile": "Dockerfile",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "extensions": [
+    "ms-vscode.vscode-node-azure-pack"
+  ],
+  "forwardPorts": [
+    5007
+  ]
+}

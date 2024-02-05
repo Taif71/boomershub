@@ -1,4 +1,3 @@
-
 import {
   Injectable,
   HttpException,
@@ -7,11 +6,9 @@ import {
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
-import { IUser } from './interfaces/user.interface';
 import { UserDTO } from './dto/user.dto';
-import * as bcrypt from 'bcrypt';
+const bcrypt = require("bcrypt")
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -29,11 +26,12 @@ export class UsersService {
    * @param {CreateUserDto} data user payload
    * @returns {Promise<IUser>} created user data
    */
-  public async create(data: CreateUserDto): Promise<IUser> {
+  async create(data: CreateUserDto): Promise<any> {
     try {
       const userDTO = new UserDTO();
       userDTO.email = data.email.toLowerCase();
-      userDTO.password = bcrypt.hashSync(data.password, 8);
+
+      userDTO.password = await this.hashPassword(data.password) as any;
 
       if (
         data.hasOwnProperty('firstName') &&
@@ -55,5 +53,17 @@ export class UsersService {
     } catch (err) {
       throw new HttpException(err, err.status || HttpStatus.BAD_REQUEST);
     }
+  }
+
+  private hashPassword = async (password: string): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      bcrypt.hash(password, 10, (err, hash) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(hash);
+        }
+      });
+    });
   }
 }
