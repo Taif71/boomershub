@@ -26,18 +26,18 @@ services:
       boomershub:
         ipv4_address: 162.168.1.5
 
-  # frontend:
-  #   user: root
-  #   container_name: frontend
-  #   build:
-  #     context: ../frontend
-  #     dockerfile: Dockerfile
-  #   restart: always
-  #   ports:
-  #     - "9000:3000"
-  #   networks:
-  #     boomershub:
-  #       ipv4_address: 162.168.1.7
+  frontend:
+    user: root
+    container_name: frontend
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "9000:3000"
+    networks:
+      boomershub:
+        ipv4_address: 162.168.1.7
         
   backend:
     user: root
