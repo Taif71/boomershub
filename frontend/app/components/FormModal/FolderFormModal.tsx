@@ -2,15 +2,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 // import M from 'materialize-css/dist/js/materialize.min.js';
 import { useCreateFolderMutation } from '@/redux/features/apis/foldersapi';
-import dynamic from 'next/dynamic';
 
-const M: any = dynamic(
-  () => import("materialize-css/dist/js/materialize.min.js"),
-  {
-    ssr: false,
-  }
-  );
 
+// const M: any = dynamic(
+//   () => import("materialize-css/dist/js/materialize.min.js"),
+//   {
+//     ssr: false,
+//   }
+//   );
+let M:any;
 const FolderFormModal = (props: any) => {
   const [reloadCounter, setReloadCounter] = useState(0);
   const [formData, setFormData] = useState({
@@ -21,11 +21,12 @@ const FolderFormModal = (props: any) => {
   const [createFolder] = useCreateFolderMutation();
 
   const modalRef = useRef<any>(null);
+ 
 
   useEffect(() => {
     // Initialize the modal
     const mFunc = async () => {
-      const M: any = await import("materialize-css/dist/js/materialize.min.js");
+       M = await import("materialize-css/dist/js/materialize.min.js");
         const modalElement = modalRef.current;
         M.Modal.init(modalElement);      
     }
@@ -43,7 +44,7 @@ const FolderFormModal = (props: any) => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     createFolder({ data: 
-      {...formData, parent: props.selectedFolder  || null }
+      {...formData, folder: props.selectedFolder  || null } // folder here is acting as a parent
     });
     // Close the modal
     const modalInstance = M.Modal.getInstance(modalRef.current);

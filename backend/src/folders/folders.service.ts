@@ -32,7 +32,8 @@ export class FoldersService {
    */
   async create(data: CreateFolderDto, user: IUser) {
     try {
-      return await this.repo.save({ ...data, user: user });
+      console.log({ data })
+      return await this.repo.save({ ...data, parent: data.folder, user: data.user });
     } catch (err) {
       throw new HttpException(err, HttpStatus.BAD_REQUEST);
     }
