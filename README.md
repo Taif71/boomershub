@@ -1,4 +1,4 @@
-# Boomershub Guidelines
+# Guidelines
 
 ## PLEASE READ
 
