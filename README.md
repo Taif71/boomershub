@@ -82,7 +82,7 @@ curl -i -X 'POST' \
   -H 'accept: */*' \
   -H 'Content-Type: application/json' \
   -d '{
-    "email": "career@boomershub.com",
+    "email": "career@testco.com",
     "password": "123456"
   }'
 
